@@ -1,0 +1,14 @@
+@import 'antd/dist/reset.css';
+@import 'bootstrap/dist/css/bootstrap-reboot.css';
+@import 'bootstrap/dist/css/bootstrap-grid.css';
+
+.bg {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(129, 216, 207, 0.7),
+    rgba(248, 245, 214, 0.7)
+  );
+}

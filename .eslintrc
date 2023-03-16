@@ -1,6 +1,12 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["airbnb", "airbnb/hooks", "airbnb-typescript", "plugin:eslint-comments/recommended", "prettier"],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:eslint-comments/recommended",
+    "prettier"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -12,12 +18,21 @@
   "plugins": ["prettier"],
   "rules": {
     "no-console": "off",
+    "no-param-reassign": "off",
+    "react/require-default-props": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "no-return-assign": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
     "react/function-component-definition": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "arrow-body-style": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "react/prop-types": "off",
     "react/button-has-type": "off",
     "import/no-extraneous-dependencies": [

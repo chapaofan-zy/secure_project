@@ -1,43 +1,61 @@
-import { EyeInvisibleOutlined, UserOutlined } from '@ant-design/icons';
-import { Input } from 'antd';
-import React, { useState } from 'react';
+import { UserOutlined } from '@ant-design/icons';
+import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
-
-const MyInput = React.memo(({ label, isPassword = false }: any) => {
-  const [inputType, setInputType] = useState(false);
-
-  return (
-    <div className={styles.inputBox}>
-      <span className={styles.label}>{label}:</span>
-      <Input
-        placeholder={`请输入${label}`}
-        prefix={
-          isPassword ? (
-            <EyeInvisibleOutlined onClick={() => setInputType(!inputType)} />
-          ) : (
-            <UserOutlined />
-          )
-        }
-        allowClear
-        type={inputType ? 'input' : 'password'}
-      />
-    </div>
-  );
-});
+import axios from '../../api';
+import MyInput from './MyInput';
 
 const Index = () => {
+  const loginParam = useRef({ username: '', password: '' });
+  const [toggle, setToggle] = useState(true);
+  const navigate = useNavigate();
+
+  async function login() {
+    try {
+      const res = await axios.post('/users/login', loginParam.current);
+      if (res?.data) {
+        await new Promise((resolve) => {
+          window.localStorage.setItem('token', res.data);
+          resolve(null);
+        });
+        navigate('/home');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex, jsx-a11y/tabindex-no-positive
-    <div className={styles.circle} tabIndex={1}>
-      <div className={styles.user}>
-        <UserOutlined className={styles.icon} />
-      </div>
-      <div className={styles.bg}>
-        <div className={styles.box}>
-          <MyInput label="用户名" />
-          <MyInput label="密码" isPassword />
+    <div className={styles.circle}>
+      {toggle ? (
+        <div className={styles.user} onClick={() => setToggle(!toggle)}>
+          <UserOutlined className={styles.icon} />
         </div>
-      </div>
+      ) : (
+        <div className={styles.box}>
+          <div onClick={() => setToggle(!toggle)}>back</div>
+          <div className={styles.bg}>
+            <MyInput
+              label="用户名"
+              onChange={(val: string) => {
+                loginParam.current.username = val;
+              }}
+              hasIcon
+            />
+            <MyInput
+              label="密码"
+              isPassword
+              onChange={(val: string) => {
+                loginParam.current.password = val;
+              }}
+              hasIcon
+            />
+            <div className={styles.login} onClick={() => login()}>
+              <span>login</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -32,6 +32,7 @@
     &:hover {
       filter: brightness(1.1);
       cursor: pointer;
+      box-shadow: 0 0 20px rgba($color: #818891, $alpha: 0.6);
     }
   }
 
@@ -102,5 +103,35 @@
         text-align-last: justify;
       }
     }
+  }
+
+  .indexBtn {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    font-size: 40px;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 400px;
+
+    span {
+      color: rgba($color: #373e46, $alpha: 0.8);
+      transition: 0.2s;
+
+      &:hover {
+        cursor: pointer;
+        color: rgba($color: #5d6c7a, $alpha: 1);
+        filter: brightness(1.1),
+          drop-shadow(0 0 5px rgba($color: #d3e0f1, $alpha: 0.6));
+        // box-shadow: 0 0 20px rgba($color: #818891, $alpha: 0.6);
+      }
+    }
+  }
+
+  .back {
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top: 20px;
   }
 }

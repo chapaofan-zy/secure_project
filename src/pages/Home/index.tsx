@@ -1,17 +1,33 @@
+import { Menu, MenuProps } from 'antd';
 import React from 'react';
-import axios from '../../api';
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+const items: MenuItem[] = [
+  {
+    label: '第一个',
+    key: '1',
+    children: [
+      {
+        label: '1-1',
+        key: '1-1',
+      },
+    ],
+  },
+];
 
 const Index = () => {
-  async function test() {
-    const res = await axios.get('/users');
-    console.log('test', res);
-  }
-
   return (
-    <div>
-      home
-      <button onClick={() => test()}>test</button>
-    </div>
+    <>
+      <div>1</div>
+      <Menu
+        mode="inline"
+        // openKeys={openKeys}
+        // onOpenChange={onOpenChange}
+        style={{ width: 256 }}
+        items={items}
+      />
+    </>
   );
 };
 

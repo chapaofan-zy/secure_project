@@ -1,21 +1,15 @@
 import React, { FunctionComponent, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Login from '../pages/Login';
 
 const routes = [
   {
-    path: '/unlogin',
-    auth: false,
-    element: lazy(() => import('../pages/NoLogin')),
-  },
-  {
-    path: '/home/*',
+    path: '/identity',
     auth: true,
-    element: lazy(() => import('../pages/Home')),
+    element: lazy(() => import('../pages/Identity')),
   },
 ];
 
-const Router: FunctionComponent = () => {
+const SubRouter: FunctionComponent = () => {
   function renderRoutes(routeMap: any[]) {
     return routeMap.map((e) => {
       return (
@@ -40,11 +34,10 @@ const Router: FunctionComponent = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Navigate to="/home/identity" />} />
       {renderRoutes(routes)}
     </Routes>
   );
 };
 
-export default Router;
+export default SubRouter;

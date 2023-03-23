@@ -2,6 +2,7 @@ import { Breadcrumb, Col, Menu, MenuProps, Row } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SubRouter from '../../routes/subRouter';
+import Header from './components/Header';
 import styles from './index.module.scss';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -41,7 +42,7 @@ const Index = () => {
 
   return (
     <>
-      <div className={styles.head}>XXX系统</div>
+      <Header />
       <Row>
         <Col>
           <Menu

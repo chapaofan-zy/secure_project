@@ -2,14 +2,17 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 import hash from 'object-hash';
+import { useDispatch } from 'react-redux';
 import styles from './index.module.scss';
 import axios from '../../api';
 import MyInput from './MyInput';
+import { setName } from '../../store/slices/user.slice';
 
 const Login = ({ setToggle }: { setToggle: (val: number) => void }) => {
   const loginParam = useRef({ username: '', password: '' });
   const [notice, setNotice] = useState({ flag: false, content: '' });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function login() {
     try {
@@ -18,9 +21,12 @@ const Login = ({ setToggle }: { setToggle: (val: number) => void }) => {
         password: hash(loginParam.current.password, { algorithm: 'md5' }),
       });
       if (res?.data) {
+        console.log(res);
+
         if (res.data?.flag) {
           await new Promise((resolve) => {
-            window.localStorage.setItem('token', res.data);
+            window.localStorage.setItem('token', res.data.token);
+            dispatch(setName(loginParam.current.username));
             resolve(null);
           });
           navigate('/home');

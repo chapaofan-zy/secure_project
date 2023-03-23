@@ -40,4 +40,4 @@ const SubRouter: FunctionComponent = () => {
   );
 };
 
-export default SubRouter;
+export default React.memo(SubRouter);

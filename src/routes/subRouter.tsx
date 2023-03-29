@@ -1,16 +1,24 @@
-import React, { FunctionComponent, lazy, Suspense } from 'react';
+import React, { FC, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-const routes = [
-  {
-    path: '/identity',
-    auth: true,
-    element: lazy(() => import('../pages/Identity')),
-  },
-];
+const routes = ['/identity', '/test', '/encryption'];
 
-const SubRouter: FunctionComponent = () => {
+const getRoutes = (function getRoutes() {
+  return routes.map((e: string) => {
+    return {
+      path: `${e}`,
+      auth: true,
+      element: lazy(
+        () => import(`../pages/${e[1].toUpperCase() + e.slice(2)}`),
+      ),
+    };
+  });
+})();
+
+const SubRouter: FC = () => {
   function renderRoutes(routeMap: any[]) {
+    console.log(routeMap);
+
     return routeMap.map((e) => {
       return (
         <Route
@@ -35,7 +43,7 @@ const SubRouter: FunctionComponent = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home/identity" />} />
-      {renderRoutes(routes)}
+      {renderRoutes(getRoutes)}
     </Routes>
   );
 };

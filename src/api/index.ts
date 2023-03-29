@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios from 'axios';
 
 const axiosEntity = axios.create({
@@ -18,7 +19,10 @@ axiosEntity.interceptors.response.use(
   (res) => res,
   (error) => {
     if (error.response.status === 401) {
-      window.location.replace('/unlogin');
+      message.error({ content: '未登录！', duration: 2 });
+      setTimeout(() => {
+        window.location.replace('/login');
+      }, 2000);
     }
     return error;
   },

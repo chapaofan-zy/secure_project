@@ -28,7 +28,12 @@ const Index = () => {
     <Register setToggle={setToggle} />,
   ]);
 
-  return <div className={styles.circle}>{loginMap.current[toggle]}</div>;
+  return (
+    <>
+      <div className={styles.title}>ikun系统</div>
+      <div className={styles.circle}>{loginMap.current[toggle]}</div>
+    </>
+  );
 };
 
 export default React.memo(Index);

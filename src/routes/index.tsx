@@ -1,6 +1,5 @@
-import { message } from 'antd';
 import React, { FunctionComponent, lazy, Suspense } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
 
 const routes = [

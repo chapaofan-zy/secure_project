@@ -43,7 +43,6 @@ const Index: React.FC = () => {
   const dispatch = useDispatch();
 
   function onChange(e: any) {
-    console.log(e);
     const obj = [...item];
     obj[2] = { title: e };
     dispatch(setBreadCrumb(obj));

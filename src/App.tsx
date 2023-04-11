@@ -9,6 +9,7 @@ const App = () => (
     font={{ color: 'rgba(0, 0, 0, 0.05' }}
     gap={[200, 200]}
   >
+    <div className={styles.img} />
     <div className={styles.bg}>
       <Router />
     </div>

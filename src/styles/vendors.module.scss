@@ -5,13 +5,16 @@
 .bg {
   width: 100vw;
   height: 100vh;
-  // overflow-y: scroll;
-  // overflow-x: hidden;
   overflow: hidden;
-  background: #f7f7f7;
-  // background-image: linear-gradient(
-  //   to bottom right,
-  //   rgba(129, 216, 207, 0.3),
-  //   rgba(248, 245, 214, 0.3)
-  // );
+}
+
+.img {
+  opacity: 0.3;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  background-image: url('../assets/kunkun.png');
+  background-size: cover;
+  background-position: center;
 }

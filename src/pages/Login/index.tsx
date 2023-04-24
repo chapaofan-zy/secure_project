@@ -1,6 +1,8 @@
 import { UserOutlined } from '@ant-design/icons';
 import React, { useRef, useState } from 'react';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import styles from './index.module.scss';
+import './index.scss';
 import Login from './login';
 import Register from './Register';
 
@@ -30,8 +32,14 @@ const Index = () => {
 
   return (
     <>
-      <div className={styles.title}>ikun系统</div>
-      <div className={styles.circle}>{loginMap.current[toggle]}</div>
+      <div className={styles.title}>xxx系统</div>
+      <div className={styles.circle}>
+        <SwitchTransition mode="out-in">
+          <CSSTransition timeout={300} key={toggle} classNames="fade">
+            {loginMap.current[toggle]}
+          </CSSTransition>
+        </SwitchTransition>
+      </div>
     </>
   );
 };

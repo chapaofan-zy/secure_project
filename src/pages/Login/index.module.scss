@@ -128,6 +128,7 @@
       transition: 0.2s;
 
       &:hover {
+        transform: translateX(1.1);
         cursor: pointer;
         color: rgba($color: #5d6c7a, $alpha: 1);
         filter: brightness(1.1),

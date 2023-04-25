@@ -5,12 +5,11 @@ const routes = ['/identity', '/test', '/encryption'];
 
 const getRoutes = (function getRoutes() {
   return routes.map((e: string) => {
+    const str = `../pages/${e[1].toUpperCase() + e.slice(2)}`;
     return {
       path: `${e}`,
       auth: true,
-      element: lazy(
-        () => import(`../pages/${e[1].toUpperCase() + e.slice(2)}`),
-      ),
+      element: lazy(() => import(str)),
     };
   });
 })();

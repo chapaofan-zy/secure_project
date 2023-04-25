@@ -1,18 +1,26 @@
 import React, { FC, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-const routes = ['/identity', '/test', '/encryption'];
+interface IRoute {
+  path: string;
+  element: React.LazyExoticComponent<any>;
+  children?: IRoute[];
+}
 
-const getRoutes = (function getRoutes() {
-  return routes.map((e: string) => {
-    const str = `../pages/${e[1].toUpperCase() + e.slice(2)}`;
-    return {
-      path: `${e}`,
-      auth: true,
-      element: lazy(() => import(str)),
-    };
-  });
-})();
+const routes: IRoute[] = [
+  {
+    path: '/identity',
+    element: lazy(() => import('../pages/Identity')),
+  },
+  {
+    path: '/test',
+    element: lazy(() => import('../pages/Test')),
+  },
+  {
+    path: '/encryption',
+    element: lazy(() => import('../pages/Encryption')),
+  },
+];
 
 const SubRouter: FC = () => {
   function renderRoutes(routeMap: any[]) {
@@ -23,7 +31,7 @@ const SubRouter: FC = () => {
         <Route
           path={e.path}
           element={
-            e.auth && !window.localStorage.getItem('token') ? (
+            !window.localStorage.getItem('token') ? (
               <Navigate to="/unlogin" />
             ) : (
               <Suspense>
@@ -42,7 +50,7 @@ const SubRouter: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home/identity" />} />
-      {renderRoutes(getRoutes)}
+      {renderRoutes(routes)}
     </Routes>
   );
 };

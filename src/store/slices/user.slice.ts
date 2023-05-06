@@ -6,12 +6,14 @@ export const userSlice = createSlice({
     username: '',
   },
   reducers: {
-    setName: (state, action) => {
-      state.username = action.payload;
+    setUserVal: (state, action) => {
+      if (action.payload?.key) {
+        state[action.payload.key as keyof typeof state] = action.payload.value;
+      }
     },
   },
 });
 
-export const { setName } = userSlice.actions;
+export const { setUserVal } = userSlice.actions;
 
 export default userSlice.reducer;

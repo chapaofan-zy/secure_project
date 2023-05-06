@@ -1,15 +1,16 @@
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import SubRouter from '../../routes/subRouter';
+import { Outlet, useNavigate } from 'react-router-dom';
+// import SubRouter from '../../routes/subRouter';
 import { setBreadCrumb } from '../../store/slices/breadCrumb.slice';
 import MHeader from './components/Header';
 import styles from './index.module.scss';
 import items from './menuItems';
+import { RootState } from '../../store';
 
 const MBread = React.memo(() => {
-  const breadItems = useSelector((state: any) => state.breadCrumb.items);
+  const breadItems = useSelector((state: RootState) => state.breadCrumb.items);
   useEffect(() => {}, [breadItems]);
   return (
     <div className={styles.breadCrumb}>
@@ -51,7 +52,8 @@ const Index = () => {
         <Layout.Content className={styles.content}>
           <MBread />
           <div className={styles.bg}>
-            <SubRouter />
+            {/* <SubRouter /> */}
+            <Outlet />
           </div>
         </Layout.Content>
       </Layout>

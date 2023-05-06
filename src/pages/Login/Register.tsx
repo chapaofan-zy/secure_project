@@ -18,6 +18,7 @@ const Register = ({ setToggle }: { setToggle: (val: number) => void }) => {
   const navigate = useNavigate();
 
   async function register() {
+    window.sessionStorage.removeItem('token');
     setIsNull(false);
     setNotSame(false);
     setNotice({ flag: false, content: '' });
@@ -43,7 +44,7 @@ const Register = ({ setToggle }: { setToggle: (val: number) => void }) => {
 
       if (res?.data) {
         await new Promise((resolve) => {
-          window.localStorage.setItem('token', res.data?.token);
+          window.sessionStorage.setItem('token', res.data?.token);
           resolve(null);
         });
         navigate('/home');

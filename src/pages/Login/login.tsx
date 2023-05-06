@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import styles from './index.module.scss';
 import axios from '../../api';
 import MyInput from './MyInput';
-import { setName } from '../../store/slices/user.slice';
+import { setUserVal } from '../../store/slices/user.slice';
 
 const Login = ({ setToggle }: { setToggle: (val: number) => void }) => {
   const loginParam = useRef({ username: '', password: '' });
@@ -25,10 +25,25 @@ const Login = ({ setToggle }: { setToggle: (val: number) => void }) => {
 
         if (res.data?.flag) {
           await new Promise((resolve) => {
-            window.localStorage.setItem('token', res.data.token);
-            dispatch(setName(loginParam.current.username));
+            window.sessionStorage.setItem('token', res.data.token);
+            dispatch(
+              setUserVal({
+                key: 'username',
+                value: loginParam.current.username,
+              }),
+            );
+            dispatch(
+              setUserVal(
+                setUserVal({
+                  key: 'token',
+                  value: res.data.token,
+                }),
+              ),
+            );
             resolve(null);
           });
+          // window.sessionStorage.setItem('token', res.data.token);
+          // dispatch(setName(loginParam.current.username));
           navigate('/home');
         } else {
           setNotice({ flag: true, content: res.data?.content });
